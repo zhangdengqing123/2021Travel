@@ -2,6 +2,7 @@
 node_modules
 /dist
 /public/mock
+package-lock.json
 
 
 # local env files

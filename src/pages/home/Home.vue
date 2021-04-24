@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <t-header :city="city"></t-header>
+    <t-header></t-header>
     <t-swiper :list="swiperList"></t-swiper>
     <t-icons :list="iconList"></t-icons>
     <t-recommend :list="recommendList"></t-recommend>
@@ -9,22 +9,26 @@
 </template>
 
 <script>
-import Header from 'components/Header'
-import Swiper from 'components/Swiper'
-import HomeIcons from 'components/HomeIcons'
-import Recommend from 'components/Recommend'
-import Weekend from 'components/Weekend'
+import Header from './components/Header'
+import Swiper from './components/Swiper'
+import HomeIcons from './components/HomeIcons'
+import Recommend from './components/Recommend'
+import Weekend from './components/Weekend'
 import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   data () {
     return {
-      city: '',
       swiperList: [],
       iconList: [],
       recommendList: [],
-      weekendList: []
+      weekendList: [],
+      lastCity: ''
     }
+  },
+  computed: {
+    ...mapState(['city'])
   },
   components: {
     't-header': Header,
@@ -35,7 +39,7 @@ export default {
   },
   methods: {
     getHomeInfo () {
-      axios.get('/api/index.json', {
+      axios.get('/api/index.json?city=' + this.city, {
         responseType: 'json'
       }).then(this.getHomeInfoSucc)
     },
@@ -43,7 +47,6 @@ export default {
       const res = response.data
       if (res.ret && res.data) {
         const data = res.data
-        this.city = data.city
         this.swiperList = data.swiperList
         this.iconList = data.iconList
         this.recommendList = data.recommendList
@@ -53,6 +56,13 @@ export default {
   },
   created () {
     this.getHomeInfo()
+    this.lastCity = this.city
+  },
+  activated () { // 缓存组件激活时, 重新渲染页面
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>

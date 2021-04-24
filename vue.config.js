@@ -20,7 +20,6 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('./src'))
       .set('pages', resolve('./src/pages'))
-      .set('components', resolve('./src/pages/home/components'))
       .set('assets', resolve('./src/assets'))
   }
 }

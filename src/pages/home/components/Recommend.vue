@@ -38,6 +38,7 @@ export default {
     overflow: hidden;
     display: flex;
     height: 1.9rem;
+    .border1px(#eee);
     .item-img-wrapper {
       .item-img {
         width: 1.7rem;
@@ -69,6 +70,9 @@ export default {
         color: #fff;
       }
     }
+  }
+  .item:last-child {
+    .border-none();
   }
 }
 </style>

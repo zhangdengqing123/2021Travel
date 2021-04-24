@@ -7,18 +7,23 @@
       <span class="iconfont">&#xe632;</span>
       输入城市/景点/游玩主题
       </div>
-    <div class="top-right">
-      {{city}}
-      <span class="iconfont arrow-icon">&#xe64a;</span>
-    </div>
+    <router-link to="/city">
+      <div class="top-right">
+        {{city}}
+        <span class="iconfont arrow-icon">&#xe64a;</span>
+      </div>
+    </router-link>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Header',
-  props: {
-    city: String
+  computed: {
+    ...mapState({
+      city: 'city' // this.city 映射为 this.$store.state.city
+    })
   }
 }
 </script>
@@ -46,9 +51,12 @@ export default {
      color: #ccc;
     }
     .top-right {
-      width: 1.24rem;
       text-align: center;
+      padding: 0 .1rem;
+      color: #fff;
+      min-width: 1.04rem;
       .arrow-icon {
+        vertical-align: top;
         font-size: .24rem;
       }
     }

@@ -28,7 +28,6 @@ export default {
  @import '~assets/mixins.less';
 .recommend {
   .title {
-    margin-top: .2rem;
     line-height: .8rem;
     background: #eee;
     text-indent: .2rem;
