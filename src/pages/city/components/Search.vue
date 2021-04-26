@@ -31,7 +31,7 @@ export default {
       list: []
     }
   },
-  activated () {
+  updated () {
     this.scroll.refresh()
   },
   methods: {

@@ -26,7 +26,7 @@
         :key="key"
         :ref="key"
       >
-        <div class="title border-bottom">{{key}}</div>
+        <div class="title border-bottom" ref="top">{{key}}</div>
         <div class="item-list" v-for="innerItem of item" :key="innerItem.id">
           <div class="item border-bottom" @click="handleClickCity(innerItem.name)">{{innerItem.name}}</div>
         </div>
@@ -44,8 +44,13 @@ export default {
     hot: Array,
     letter: String
   },
-  activated () {
+  updated () { // 当betterScroll发生改变得实际执行
     this.scroll.refresh()
+  },
+  activated () { // 当缓存组件被激活时，调用
+    if (this.scroll) {
+      this.scroll.refresh()
+    }
   },
   computed: {
     ...mapState({

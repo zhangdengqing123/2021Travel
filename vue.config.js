@@ -21,5 +21,6 @@ module.exports = {
       .set('@', resolve('./src'))
       .set('pages', resolve('./src/pages'))
       .set('assets', resolve('./src/assets'))
+      .set('common', resolve('./src/common'))
   }
 }
