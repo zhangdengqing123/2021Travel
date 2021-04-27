@@ -26,8 +26,8 @@ export default {
     }
   },
   methods: {
-    handleScroll () {
-      console.log('scroll')
+    handleScroll (e) {
+      // console.log('scroll')
       const top = document.documentElement.scrollTop || document.body.scrollTop
       let opacity = ''
       if (top > 60) {
@@ -41,10 +41,10 @@ export default {
     }
   },
   mounted () { // 进入页面激活缓存组件
-    window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('scroll', this.handleScroll, false)
   },
   destroyed () { // 离开当前页面解除 scroll 事件
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScroll, false)
   }
 }
 </script>
